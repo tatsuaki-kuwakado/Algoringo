@@ -25,7 +25,9 @@ body {
   font-family: quasimoda, sans-serif;
   font-weight: 900;
   font-size: 300px;
-  /* background: #fafafa; */
+  background: -webkit-linear-gradient(293deg, #5374fa 12.41, #fd9179 52.55, #ff6969 89.95) !important;
+  background: -o-linear-gradient(293deg, #5374fa 12.41, #fd9179 52.55, #ff6969 89.95) !important;
+  background: linear-gradient(23deg, #5374fa 12.41, #fd9179 52.55, #ff6969 89.95) !important;
   text-align: center;
 }
 
