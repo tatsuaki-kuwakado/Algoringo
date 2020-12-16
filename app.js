@@ -8,8 +8,8 @@
 済）- 「次いってみよう」ボタン => 最下部固定
 済）- 「次いってみよう」ボタン => キーアサイン
 済）- 全部の数字を出し終わったら「次いってみよう」ボタンは押せなくする
-済）-- サウンド
-済）-- 連打防止
+済）-- 効果音
+済）-- 効果音が鳴ってる間は連打防止
 - 本当に閉じていいですか？
 
 - レスポンシブ（一応）
@@ -70,6 +70,7 @@ $(function() {
     // 終了後
     if (numbers.length === 0) {
       alert('終了!!');
+      $('.btn').css('pointer-events', 'none').fadeOut();
       return;
     }
 
@@ -86,7 +87,8 @@ $(function() {
 
     mentioned.push(num); // 末尾に追加
     console.log(`numbers.length => ${numbers.length}, mentioned.length => ${mentioned.length}`);
-    console.log(`mentioned => ${mentioned}`);
+    console.log(`残り => ${numbers}`);
+    console.log(`既出 => ${mentioned}`);
 
     var txt = "";
     for (var i = 0; i < mentioned.length; i++) {
@@ -100,12 +102,11 @@ $(function() {
     }
     $('#mentioned_nums').html(txt);
     $('.second-to-last').fadeIn();
+    console.log('---');
   }
 
 
   function sound() {
-    console.log('drum!!');
-
     $('#drumroll')[0].play();
   }
 
