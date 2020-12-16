@@ -1,0 +1,208 @@
+// Algoringo
+//
+// ■cssの監視（改行なし）
+// $ sass --watch scss/style.scss:scss/style.min.css --style compact --sourcemap=none
+// ■cssの監視（ファイル圧縮）
+// $ sass --watch scss/style.scss:scss/style.min.css --style compressed --sourcemap=none
+
+/**********
+A Modern CSS Reset
+**********/
+*,*::before,*::after{box-sizing:border-box}ul[class],ol[class]{padding:0}body,h1,h2,h3,h4,p,ul[class],ol[class],figure,blockquote,dl,dd{margin:0}body{/*min-height:100vh;*/scroll-behavior:smooth;text-rendering:optimizeSpeed;line-height:1.7}ul[class],ol[class]{list-style:none}a:not([class]){text-decoration-skip-ink:auto}img{max-width:100%;display:block}article>*+*{margin-top:1em}input,button,textarea,select{font:inherit}
+// img:not([alt]){filter:blur(10px)}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
+
+
+/**********
+汎用設定（mixin）
+**********/
+/*** フォントサイズ ***/
+@mixin fz($size: 24, $base: 16) {
+  font-size: $size + px !important;
+  font-size: ($size / ($base * 0.625)) + rem !important;
+}
+
+/*** マウスオーバー時 ***/
+@mixin hover {
+  &:hover {
+    -webkit-transition: all .4s ease 0s;
+    -moz-transition: all .4s ease 0s;
+    -ms-transition: all .4s ease 0s;
+    -o-transition: all .4s ease 0s;
+    transition: all .4s ease 0s;
+    opacity: .6;
+    cursor: pointer;
+  }
+}
+
+/*** 選択時 ***/
+::selection {
+  // background: $color_base; /* [TODO] */
+}
+
+/*** 幅 ***/
+@mixin width($size: 10) { width: $size + px !important; }
+@mixin width_p($size: 10) { width: percentage($size / 100) !important; }
+.width100p { @include width_p(100); }
+
+/*** margin ***/
+@mixin mt($size: 10) { margin-top: $size + px !important; }
+@mixin mr($size: 10) { margin-right: $size + px !important; }
+@mixin mb($size: 10) { margin-bottom: $size + px !important; }
+@mixin ml($size: 10) { margin-left: $size + px !important; }
+@mixin mt_p($size: 10) { margin-top: percentage($size / 100) !important; }
+@mixin mr_p($size: 10) { margin-right: percentage($size / 100) !important; }
+@mixin mb_p($size: 10) { margin-bottom: percentage($size / 100) !important; }
+@mixin ml_p($size: 10) { margin-left: percentage($size / 100) !important; }
+
+/*** padding ***/
+@mixin pt($size: 10) { padding-top: $size + px !important; }
+@mixin pr($size: 10) { padding-right: $size + px !important; }
+@mixin pb($size: 10) { padding-bottom: $size + px !important; }
+@mixin pl($size: 10) { padding-left: $size + px !important; }
+@mixin pt_p($size: 10) { padding-top: percentage($size / 100) !important; }
+@mixin pr_p($size: 10) { padding-right: percentage($size / 100) !important; }
+@mixin pb_p($size: 10) { padding-bottom: percentage($size / 100) !important; }
+@mixin pl_p($size: 10) { padding-left: percentage($size / 100) !important; }
+
+/*** text-align ***/
+@mixin tal { text-align: left !important; }
+@mixin tac { text-align: center !important; }
+@mixin tar { text-align: right !important; }
+@mixin taj { text-align: justify !important; }
+.tal { @include tal; }
+.tac { @include tac; }
+.tar { @include tar; }
+.taj { @include taj; }
+
+/*** border-box ***/
+@mixin bb { box-sizing: border-box !important; }
+
+/*** border-radius ***/
+@mixin borderRadius($size: 10) { border-radius: $size + px; }
+
+/*** float ***/
+@mixin fl { float: left; }
+@mixin fr { float: right; }
+
+/*** clearfix ***/
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+/*** flex ***/
+@mixin flex {
+  display: -webkit-flex !important;
+  display: -moz-flex !important;
+  display: -ms-flex !important;
+  display: -o-flex !important;
+  display: flex !important;
+}
+.flex { @include flex; }
+
+/*** opacity ***/
+@mixin op($size: 1) { opacity: $size; }
+
+
+/**********
+画面
+**********/
+html {
+  font-family: YakuHanJP, "Hiragino Sans", "メイリオ", Meiryo, "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体",  "ＭＳ Ｐゴシック", sans-serif;
+  font-size: 62.5%;
+  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #369 url(../img/bg.jpg) center center / cover no-repeat fixed;
+  body {
+    padding: 30px;
+    @include fz(20);
+    #container {
+      @include flex;
+      flex-flow: column wrap;
+      justify-content: center;
+      align-items: center;
+
+      /*** 結果の数字表示 ***/
+      #result {
+        width: 80%;
+        height: 330px;
+        line-height: 330px;
+        font-size: 330px;
+        margin: 30px auto 90px;
+        color: #fff;
+        text-align: center;
+        font-family: base-mono-wide, monospace;
+        font-weight: 700;
+        font-style: normal;
+        &.result_num {}
+      }
+
+      /*** 出た数字 ***/
+      #mentioned {
+        @include width_p(80);
+        margin: 30px auto;
+        #mentioned_nums {
+          display: flex;
+          flex-flow: row wrap;
+          font-family: quasimoda, sans-serif;
+          font-weight: bold;
+          text-align: center;
+          @include fz(32);
+          span {
+            display: inline-block;
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            border-radius: 50%;
+            background: #333;
+            color: #fff;
+            margin: 0 8px 16px;
+            padding: 0 12px;
+            box-sizing: border-box;
+            transition-duration: .2s;
+            &:hover {
+              transform: scale(3, 3);
+              transition-duration: .2s;
+            }
+            &.latest { display: none; }
+          }
+        }
+      }
+
+      /*** ボタン ***/
+      .btn {
+        position: absolute;
+        bottom: 50px;
+        width: calc(80% - 60px);
+        text-align: center;
+        &.btn-gradient-3d-orange {
+          display: inline-block;
+          padding: 15px 30px;
+          text-decoration: none;
+          border-radius: 4px;
+          background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+          box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+          border-bottom: solid 3px #c58668;
+          color: #fff;
+          font-weight: bold;
+          @include fz(24);
+          &:active {
+            -webkit-transform: translateY(4px);
+            transform: translateY(4px);
+            box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+}
