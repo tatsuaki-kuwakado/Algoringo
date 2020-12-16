@@ -13,17 +13,23 @@
 </head>
 <body>
   <div id="container">
-    <!-- <h1>BINGO</h1> -->
-    <div id="result">BINGO</div>
+    <h1 id="initial">ALGORINGO</h1>
+    <div id="result" class="odometer">
+    </div>
     <div id="mentioned">
       <!-- <h2>既出</h2> -->
       <div id="mentioned_nums"></div>
     </div>
     <a href="#" class="btn-gradient-3d-orange btn">BUTTON</a>
+    <audio id="drumroll" preload="auto">
+      <source src="audio/nc174742.mp3" type="audio/mp3">
+    </audio>
   </div><!-- /#container -->
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="./lib/odometer-theme-train-station.css" />
+  <script src="./lib/odometer.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

@@ -132,17 +132,22 @@ html {
       align-items: center;
 
       /*** 結果の数字表示 ***/
-      #result {
+      h1#initial, #result {
         width: 80%;
         height: 330px;
         line-height: 330px;
-        font-size: 330px;
-        margin: 30px auto 90px;
         color: #fff;
         text-align: center;
         font-family: base-mono-wide, monospace;
         font-weight: 700;
         font-style: normal;
+      }
+      h1#initial {
+        @include fz(200);
+      }
+      #result {
+        font-size: 330px;
+        margin: 30px auto 90px;
         &.result_num {}
       }
 
@@ -173,7 +178,7 @@ html {
               transform: scale(3, 3);
               transition-duration: .2s;
             }
-            &.latest { display: none; }
+            &.latest, &.second-to-last { display: none; }
           }
         }
       }
