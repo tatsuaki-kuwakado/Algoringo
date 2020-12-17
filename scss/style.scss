@@ -260,7 +260,7 @@ html {
         /*** ボタン ***/
         .btn {
           bottom: 30px;
-          width: calc(100% - 60px);
+          // width: calc(100% - 60px);
           margin: 0 auto;
           &.btn-gradient-3d-orange {
             &:active {}
