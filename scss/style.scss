@@ -109,7 +109,7 @@ A Modern CSS Reset
 
 
 /**********
-画面
+画面（全ディスプレイ）
 **********/
 html {
   font-family: YakuHanJP, "Hiragino Sans", "メイリオ", Meiryo, "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体",  "ＭＳ Ｐゴシック", sans-serif;
@@ -205,6 +205,65 @@ html {
             transform: translateY(4px);
             box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
             border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/**********
+画面（SP/TB用）
+**********/
+@media screen and (max-width: 1199px) {
+  html {
+    body {
+      padding: 30px 20px;
+      #container {
+
+        /*** 結果の数字表示 ***/
+        h1#initial, #result {
+          @include width_p(100);
+          margin: 0 auto;
+          height: 100px;
+          line-height: 100px;
+        }
+        h1#initial {
+          @include fz(48);
+        }
+        #result {
+          font-size: 100px;
+          margin: 30px auto 45px;
+          &.result_num {}
+        }
+
+        /*** 出た数字 ***/
+        #mentioned {
+          @include width_p(100);
+          #mentioned_nums {
+            @include fz(24);
+            span {
+              width: 48px;
+              height: 48px;
+              line-height: 48px;
+              border-radius: 50%;
+              margin: 0 4px 8px !important;
+              padding: 0 8px 5px !important;
+              &:hover {}
+              &.latest, &.second-to-last {}
+            }
+          }
+        }
+
+
+        /*** ボタン ***/
+        .btn {
+          bottom: 30px;
+          width: calc(100% - 60px);
+          margin: 0 30px;
+          &.btn-gradient-3d-orange {
+            &:active {}
           }
         }
       }
