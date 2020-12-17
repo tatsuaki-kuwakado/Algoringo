@@ -29,6 +29,21 @@ $(function() {
   var cancelFlag = 0;
   // console.log(numbers);
 
+  // 離脱前の確認
+  var elementClicked = false; // 適当なフラグ
+  $(window).on("beforeunload", function() {
+    if (!elementClicked) {
+      return "本当に遷移しちゃう？";
+    }
+  });
+  $(document).on("click", "a, button, input[type=submit]", function() {
+    elementClicked = true;
+    setTimeout(function() {
+      elementClicked = false;
+    }, 100);
+  });
+
+
   if (isStart === false) {
     $('.btn').text('START');
   }
