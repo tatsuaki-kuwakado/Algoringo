@@ -11,8 +11,7 @@
 済）-- 効果音
 済）-- 効果音が鳴ってる間は連打防止
 - 本当に閉じていいですか？
-
-- レスポンシブ（一応）
+済）- レスポンシブ（一応）
 
 ■UX上のギミック
 済）- フォント
@@ -36,7 +35,7 @@ $(function() {
 
 
   $('.btn').on('click', function() {
-    // 連打防止（4秒）
+    // 4秒間は連打防止
     if (cancelFlag == 0) {
       cancelFlag = 1;
       console.log("まだ処理中です!!");
@@ -46,8 +45,9 @@ $(function() {
 
       setTimeout(function() {
         cancelFlag = 0;
-        $('.btn').css('pointer-events', 'auto').text('NEXT').fadeIn();
+        $('.btn').css('pointer-events', 'auto').text('NEXT (n)').fadeIn();
         console.log("準備完了!!");
+        console.log('---');
       }, 4000);
     }
   });
@@ -67,9 +67,19 @@ $(function() {
       // $('.btn').text('次行ってみよう!!');
     }
 
-    // 終了後
+    // ゲーム終了時
     if (numbers.length === 0) {
-      alert('終了!!');
+      // 注）SweetAlert依存
+      Swal.fire({
+        title: 'ゲーム終了!!',
+        text: "お疲れさまでした。",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'OK'
+      });
+
       $('.btn').css('pointer-events', 'none').fadeOut();
       return;
     }
