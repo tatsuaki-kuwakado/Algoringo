@@ -108,4 +108,5 @@
 }
 .odometer.odometer-auto-theme .odometer-digit .odometer-digit-inner, .odometer.odometer-theme-train-station .odometer-digit .odometer-digit-inner {
   left: 0.15em;
+  padding-top: 10px;
 }
